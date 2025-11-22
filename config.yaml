@@ -1,0 +1,34 @@
+policies:
+  Kids_input:
+    - type: PII_Scrubber
+      config:
+        mask_token: "[HIDDEN_INFO]"
+    - type: Jailbreak_Detector
+      config:
+        keywords:
+          - "tell me how to bypass"
+          - "dan mode"
+          - "ignore previous rules"
+    - type: Semantic_Threat_Detector
+      config: {}
+
+  Enterprise_input:
+    - type: PII_Scrubber
+      config:
+        mask_token: "[MASKED]"
+    - type: Jailbreak_Detector
+      config:
+        keywords:
+          - "tell me how to bypass"
+          - "ignore previous rules"
+          - "dan mode"
+    - type: Semantic_Threat_Detector
+      config: {}
+
+  Default_output:
+    - type: Output_Sanitizer
+      config:
+        mask_token: "[REDACTED]"
+        disallowed_domains:
+          - "pastebin.com"
+          - "anonfiles.com"
